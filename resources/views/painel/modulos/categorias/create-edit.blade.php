@@ -1,7 +1,7 @@
 <!-- dashboard.blade.php -->
 @extends('painel.templates.dashboard')
 
-@section('content')	
+@section('content')
 
 <div class="title-pg">
         <h1 class="title-pg">Cadasro de Categorias</h1>
@@ -27,26 +27,26 @@
 
 
 @if(isset($data))
-    <form 
-    class="form form-search form-ds"  
+    <form
+    class="form form-search form-ds"
     method="post" action="{{route('categorias.update', $data->id)}}" enctype="multipart/form-data">
         {{ method_field('PUT') }}
 @else
-    <form 
-    class="form form-search form-ds"  
+    <form
+    class="form form-search form-ds"
     method="post" action="{{route('categorias.store')}}" enctype="multipart/form-data">
 @endif
-        {{ csrf_field() }} 
-        
+        {{ csrf_field() }}
+
         <div class="form-group col-md-6">
                 <label for="InputName">Nome</label>
                 <input type="text" class="form-control" id="InputName" name="name" placeholder="Nome" value="{{$data->name ?? old('name')}}">
             </div>
             <div class="form-group col-md-6">
-                    <label for="InputUrl">Email</label>
+                    <label for="InputUrl">Url</label>
                     <input type="text" class="form-control" id="InputUrl" name="url" placeholder="Url" value="{{$data->url ?? old('url')}}">
                 </div>
-            
+
                 <!-- textarea -->
                 <div class="form-group col-md-6">
                     <label>Descrição</label>

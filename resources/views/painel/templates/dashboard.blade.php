@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Curso Layout Dashboard</title>
+		<title>Painel | Dashboard</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -19,7 +19,7 @@
 <body>
 
 <section class="menu">
-	
+
 	<div class="logo">
 		<img src="{{url('painel/imgs/icone-alfa.png')}}" alt="webdevalfa" class="logo-painel">
 	</div>
@@ -60,18 +60,18 @@
 
 <section class="content">
 	<div class="top-dashboard">
-		
+
 		<div class="dropdown user-dash">
 		  <div class="dropdown-toggle" id="dropDownCuston" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			 
+
 			@if ( isset(Auth::user()->image) )
-			
+
 			<img src='{{URL::asset('/assets/uploads/users/'.Auth::user()->image)}}' alt="{{Auth::user()->name}}" class="user-dashboard img-circle">
-			
-			@else 
-			
+
+			@else
+
 				<img src="{{url('painel/imgs/no-image.png')}}" alt="Jaime Vendrame" class="user-dashboard img-circle">
-	
+
 			@endif
 		    <p class="user-name">{{Auth::user()->name}}</p>
 			<span class="caret"></span>
@@ -94,12 +94,12 @@
 	</div><!--Top Dashboard-->
 
 	<div class="content-ds">
-		
+
 		<div class="bred">
 			<a href="" class="bred">Home  ></a> <a href="" class="bred">Dashboard</a>
 		</div>
 
-		
+
 		@yield('content')
 
 
@@ -107,7 +107,7 @@
 
 </section><!--End Content-->
 
-	
+
 
 	<!--jQuery-->
 	<script src="js/jquery-3.1.1.min.js"></script>
