@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Painel;
 
-use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class CategoryController extends StandardController
+class PostController extends StandardController
 {
     protected $model;
-    protected $view = 'painel.modulos.categorias';
-    protected $upload = ['image'=> 'image', 'path' => 'categoria'];
-    protected $route = 'categorias';
+    protected $view = 'painel.modulos.posts';
+    protected $upload = ['image'=> 'image', 'path' => 'post'];
+    protected $route = 'posts';
 
-    public function __construct(Category $category)
+    public function __construct(Post $post)
     {
-        $this->model = $category;
+        $this->model = $post;
     }
 
     public function search(Request $request)

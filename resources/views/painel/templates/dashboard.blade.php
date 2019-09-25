@@ -48,9 +48,9 @@
 			</li>
 
 			<li>
-				<a href="?pag=forms">
+				<a href="{{route('posts.index')}}">
 					<i class="fa fa-fort-awesome" aria-hidden="true"></i>
-					Forms
+					Posts
 				</a>
 			</li>
 		</ul>

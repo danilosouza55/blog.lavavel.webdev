@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class StandardController extends Controller
-{ 
-    
+{
+
     protected $totalpages = 15;
 
     /**
@@ -19,7 +19,7 @@ class StandardController extends Controller
     {
         $datas = $this->model->paginate($this->totalpages);
 
-        return view("{$this->view}.index",compact('datas'));
+        return view("{$this->view}.index", compact('datas'));
     }
 
     /**
@@ -31,34 +31,34 @@ class StandardController extends Controller
     {
 
         // $data =' ';
-        return view ("{$this->view}.create-edit");
+        return view("{$this->view}.create-edit");
 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param \Illuminate\Http\Request $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
 
         // dd($request);
 
-         //VALIDA OS DADOS
-         $this->validate($request, $this->model->rules());
+        //VALIDA OS DADOS
+        $this->validate($request, $this->model->rules());
         //PEGANDO OS DADOS DO FORMULÁRIO
         $dataForm = $request->all();
-       
+
         //Verificar se existe a imagem
-        if ( $request->hasFile('image')){
+        if ($request->hasFile('image')) {
             //pegar a imagem
             $image = $request->file('image');
             //Definir no nome da imagem
-            $nameFile = uniqid(date('YmdHis')).'.'.$image->getClientOriginalExtension();
+            $nameFile = uniqid(date('YmdHis')) . '.' . $image->getClientOriginalExtension();
             $upload = $image->storeAs($this->upload['path'], $nameFile);
-            if ( $upload )
+            if ($upload)
                 $dataForm['image'] = $nameFile;
             else
                 return redirect()
@@ -66,25 +66,25 @@ class StandardController extends Controller
                     ->withErrors(['errors' => 'Erro no upload da imagem'])
                     ->withInput();
         }
-    
+
         //inserir os dados
         $insert = $this->model->create($dataForm);
         //RETORNADO MENSAGEM PARA VIEW
-           if($insert)
-               return redirect()
-                   ->route("{$this->route}.index")
-                   ->with(['success'=>'Cadastro realizado com sucesso!']);
-           else
-               return redirect()
-                   ->route("{$this->route}.create")
-                   ->withErrors(['errors' => 'Falha ao cadastrar'])
-                   ->withInput();
+        if ($insert)
+            return redirect()
+                ->route("{$this->route}.index")
+                ->with(['success' => 'Cadastro realizado com sucesso!']);
+        else
+            return redirect()
+                ->route("{$this->route}.create")
+                ->withErrors(['errors' => 'Falha ao cadastrar'])
+                ->withInput();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -98,77 +98,76 @@ class StandardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //Recuperar usuário
         $data = $this->model->find($id);
- 
+
         return view("{$this->view}.create-edit", compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
 
-         //Criar objeto usuario
-         $data = $this->model->find($id);
+        //Criar objeto usuario
+        $data = $this->model->find($id);
 
         //VALIDA OS DADOS
         $this->validate($request, $this->model->rules($id));
-         //PEGANDO OS DADOS DO FORMULÁRIO
+        //PEGANDO OS DADOS DO FORMULÁRIO
         $dataForm = $request->all();
-        
- 
- 
-         //Verificar se existe a imagem
-        if ( $request->hasFile('image')){
-             //pegar a imagem
-             $image = $request->file('image');
- 
-             //Definir no nome da imagem
-            if ($data->image == ''){
-                $nameImage = uniqid(date('YmdHis')).'.'.$image->getClientOriginalExtension();
+
+
+        //Verificar se existe a imagem
+        if ($request->hasFile('image')) {
+            //pegar a imagem
+            $image = $request->file('image');
+
+            //Definir no nome da imagem
+            if ($data->image == '') {
+                $nameImage = uniqid(date('YmdHis')) . '.' . $image->getClientOriginalExtension();
                 $dataForm['image'] = $nameImage;
             } else {
                 $nameImage = $data->image;
             }
- 
-             $upload = $image->storeAs($this->upload['path'], $nameImage);
- 
-             if ( $upload )
-                 $dataForm['image'] = $nameImage;
-             else
-                 return redirect()
-                     ->route("{$this->route}.index")
-                     ->withErrors(['errors' => 'Erro no upload da imagem'])
-                     ->withInput();
-         }
+
+            $upload = $image->storeAs($this->upload['path'], $nameImage);
+
+            if ($upload)
+                $dataForm['image'] = $nameImage;
+            else
+                return redirect()
+                    ->route("{$this->route}.index")
+                    ->withErrors(['errors' => 'Erro no upload da imagem'])
+                    ->withInput();
+        }
         //Alterar os dados
         $update = $data->update($dataForm);
-        if($update)
+        if ($update)
             return redirect()
                 ->route("{$this->route}.index")
-                ->with(['success'=>'Alteração realizada com sucesso!']);
+                ->with(['success' => 'Alteração realizada com sucesso!']);
         else
             return redirect()
                 ->route("{$this->route}.update")
                 ->withErrors(['errors' => 'Falha ao editar'])
-                ->withInput(); 
+                ->withInput();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -178,14 +177,13 @@ class StandardController extends Controller
         if ($delete) {
             return redirect()
                 ->route("{$this->route}.index")
-                ->with(['success'=>"{$data->name} excluido com sucesso!"]);
+                ->with(['success' => "{$data->name} excluido com sucesso!"]);
         } else {
             return redirect()
                 ->route("{$this->route}.show")
-                ->withErrors(['errors'=>'Falha ao excluir!']);
+                ->withErrors(['errors' => 'Falha ao excluir!']);
         }
     }
-
 
 
 }

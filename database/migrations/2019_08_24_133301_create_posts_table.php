@@ -30,6 +30,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 250);
             $table->text('description');
             $table->date('date');
+            $table->string('image', 200)->nullable();
             $table->time('hour');
             $table->boolean('featured')->default(false);
             $table->enum('status', ['A', 'R'])->default('A')->comment('A-> Ativo postado, R-> Rascunho, não postado');
