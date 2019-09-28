@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Painel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class StandardController extends Controller
 {
@@ -44,12 +45,15 @@ class StandardController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request);
 
         //VALIDA OS DADOS
         $this->validate($request, $this->model->rules());
         //PEGANDO OS DADOS DO FORMULÁRIO
         $dataForm = $request->all();
+
+        $dataForm['status'] = (!isset($dataForm['status'])) ? 0 : 1;
+        $dataForm['featured'] = (!isset($dataForm['featured'])) ? 0 : 1;
+        $dataForm['user_id'] = Auth::user()->id;
 
         //Verificar se existe a imagem
         if ($request->hasFile('image')) {
@@ -110,11 +114,11 @@ class StandardController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {

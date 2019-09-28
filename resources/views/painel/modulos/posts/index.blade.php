@@ -10,7 +10,7 @@
     <div class="content-din bg-white">
 
         <div class="form-search">
-            <form class="form form-inline" method="get" action="{{route('usuarios.search')}}"
+            <form class="form form-inline" method="get" action="{{route('posts.search')}}"
                   enctype="multipart/form-data">
 
                 <input type="text" name="pesquisa" class="form-control">
