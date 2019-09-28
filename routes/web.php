@@ -16,6 +16,7 @@
 Route::get('empresa', 'Site\\SiteController@empresa');
 Route::get('contato', 'Site\\SiteController@contato');
 Route::get('/', 'Site\\SiteController@index');
+Route::get('/home', 'Site\\SiteController@index');
 
 
 Auth::routes();
@@ -23,7 +24,9 @@ Auth::routes();
  * Rotas do Painel
  ****************************************************************************************/
 Route::group(['prefix' => 'painel', 'middleware' => 'auth'], function () {
-
+    //Raiz painel
+    Route::get('/', 'Painel\HomeController@index');
+    Route::get('/home', 'Painel\HomeController@index')->name('painelHome.index');
     //Usuários
     Route::any('/usuarios/pesquisar', 'Painel\UserController@search')->name('usuarios.search');
     Route::resource('/usuarios', 'Painel\UserController');
@@ -33,9 +36,4 @@ Route::group(['prefix' => 'painel', 'middleware' => 'auth'], function () {
     //Pots
     Route::any('/posts/pesquisar', 'Painel\PostController@search')->name('posts.search');
     Route::resource('/posts', 'Painel\PostController');
-    //Raiz painel
-    Route::get('/', 'HomeController@index')->name('home');
 });
-
-
-Route::get('/home', 'HomeController@index')->name('home');

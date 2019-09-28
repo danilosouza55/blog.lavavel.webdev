@@ -27,7 +27,7 @@
 	<div class="list-menu">
 		<ul class="menu-list">
 			<li>
-				<a href="?pag=home">
+				<a href="{{route('painelHome.index')}}">
 					<i class="fa fa-home" aria-hidden="true"></i>
 					Home
 				</a>
