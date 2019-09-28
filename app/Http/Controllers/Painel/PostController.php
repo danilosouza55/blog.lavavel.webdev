@@ -32,6 +32,23 @@ class PostController extends StandardController
         return view("{$this->view}.create-edit", compact('items'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $items = Category::all('id', 'name');
+
+        //Recuperar usuário
+        $data = $this->model->find($id);
+
+        return view("{$this->view}.create-edit", compact('data', 'items'));
+    }
+
+
     public function search(Request $request)
     {
         //Recupera os dados do formulário

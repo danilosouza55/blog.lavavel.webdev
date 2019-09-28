@@ -65,7 +65,7 @@
                             <label>Categoria</label>
                             <select class="form-control" name="category_id">
                                 @foreach($items->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}"> {{$item->name}} </option>
                                 @endforeach
                             </select>
                         </div>
