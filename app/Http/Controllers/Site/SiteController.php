@@ -19,7 +19,8 @@ class SiteController extends Controller
     public function index()
     {
         $itemsCategorias = Category::all('id', 'name');
-        $itemsPost = Post::all('id', 'title', 'description', 'date', 'image', 'featured');
+        $itemsPost = Post::where('featured', 0)
+            ->get();
 
         /** @var \App\Models\Post $postDestaque */
         $postDestaque = Post::where('featured', 1)
