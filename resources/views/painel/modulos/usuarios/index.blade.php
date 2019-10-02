@@ -1,7 +1,7 @@
 <!-- dashboard.blade.php -->
 @extends('painel.templates.dashboard')
 
-@section('content')	
+@section('content')
 
 <div class="title-pg">
     <h1 class="title-pg">Listagem dos Usuários</h1>
@@ -12,7 +12,7 @@
     <div class="form-search">
         <form class="form form-inline"  method="get" action="{{route('usuarios.search')}}" enctype="multipart/form-data">
 
-            <input type="text" name="pesquisa"  class="form-control">
+            <input type="text" value="{{$_GET['pesquisa'] ?? ""}}" name="pesquisa"  class="form-control">
 
             <button type="submit" class="btn btn-default">Pesquisar</button>
         </form>
@@ -68,7 +68,7 @@
         {{$users->appends(Request::only('pesquisa'))->links()}}
     @else
         {{$users->links()}}
-    @endif  
+    @endif
 
 </div><!--Content Dinâmico-->
 @endsection

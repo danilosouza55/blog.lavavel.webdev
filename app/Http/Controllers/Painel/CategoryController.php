@@ -9,7 +9,7 @@ class CategoryController extends StandardController
 {
     protected $model;
     protected $view = 'painel.modulos.categorias';
-    protected $upload = ['image'=> 'image', 'path' => 'categoria'];
+    protected $upload = ['image' => 'image', 'path' => 'categoria'];
     protected $route = 'categorias';
 
     public function __construct(Category $category)
@@ -19,13 +19,14 @@ class CategoryController extends StandardController
 
     public function search(Request $request)
     {
-    //Recupera os dados do formulário
-    $dataForm = $request->get('pesquisa');
-    //Filtra os usuários
-    $users = $this->model
-        ->where('name', 'LIKE', "%{$dataForm}%")
-        ->orWhere('description', 'LIKE', "%{$dataForm}%")
-        ->paginate($this->totalpages);
-    return view("painel.modulos.usuarios.index", compact('users', 'dataForm'));
+        //Recupera os dados do formulário
+        $dataForm = $request->get('pesquisa');
+        //Filtra os usuários
+        $datas = $this->model
+            ->where('name', 'LIKE', "%{$dataForm}%")
+            ->orWhere('description', 'LIKE', "%{$dataForm}%")
+            ->paginate($this->totalpages);
+
+        return view("{$this->view}.index", compact('datas', 'dataForm'));
     }
 }

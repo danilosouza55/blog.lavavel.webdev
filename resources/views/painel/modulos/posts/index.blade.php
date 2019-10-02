@@ -13,7 +13,7 @@
             <form class="form form-inline" method="get" action="{{route('posts.search')}}"
                   enctype="multipart/form-data">
 
-                <input type="text" name="pesquisa" class="form-control">
+                <input type="text" value="{{$_GET['pesquisa'] ?? ""}}" name="pesquisa" class="form-control">
 
                 <button type="submit" class="btn btn-default">Pesquisar</button>
             </form>

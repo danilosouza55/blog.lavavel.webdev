@@ -39,7 +39,7 @@
 <section class="content">
     <div class="col-md-8">
 
-        @foreach($itemsPost as $idx => $item)
+        @forelse($itemsPost as $idx => $item)
             <article class="post">
                 <div class="image-post col-md-4 text-center">
                     <img src="assets/uploads/post/{{$item->image}}" alt="{{$item->title}}" class="img-post">
@@ -55,7 +55,11 @@
                             class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
             </article>
-        @endforeach
+        @empty
+            <tr>
+                <td>Nenhum registro encontrado!!</td>
+            </tr>
+        @endforelse
     </div><!--POSTS-->
 
     <!--Sidebar-->

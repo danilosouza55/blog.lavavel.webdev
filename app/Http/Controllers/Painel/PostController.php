@@ -54,11 +54,11 @@ class PostController extends StandardController
         //Recupera os dados do formulário
         $dataForm = $request->get('pesquisa');
         //Filtra os usuários
-        $users = $this->model
-            ->where('name', 'LIKE', "%{$dataForm}%")
+        $datas = $this->model
+            ->where('title', 'LIKE', "%{$dataForm}%")
             ->orWhere('description', 'LIKE', "%{$dataForm}%")
             ->paginate($this->totalpages);
 
-        return view("painel.modulos.usuarios.index", compact('users', 'dataForm'));
+        return view("painel.modulos.posts.index", compact('datas', 'dataForm'));
     }
 }
