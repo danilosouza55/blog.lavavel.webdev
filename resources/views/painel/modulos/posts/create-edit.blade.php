@@ -54,12 +54,12 @@
                         <div class="form-group col-md-6">
                             <label for="InputFeatured">Destaque</label>
                             <input type="checkbox" class="form-check-input" id="featured" name="featured"
-                                   value="{{$data->featured ?? 1}}">
+                                {{($data->featured) === 1 ? 'checked' : '' }}>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="InputUrl">Status</label>
-                            <input type="checkbox" class="form-check-input" id="InputUrl" name="status"
-                                   value="{{$data->status ?? 1}}">
+                            <label for="InputStatus">Status</label>
+                            <input type="checkbox" class="form-check-input" id="InputStatus" name="status"
+                                {{($data->status) === 'A' ? 'checked' : '' }}>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Categoria</label>
