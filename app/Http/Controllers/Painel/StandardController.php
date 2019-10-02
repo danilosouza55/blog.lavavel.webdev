@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use function Psy\debug;
 
 class StandardController extends Controller
 {
@@ -130,6 +131,8 @@ class StandardController extends Controller
         //PEGANDO OS DADOS DO FORMULÁRIO
         $dataForm = $request->all();
 
+        $dataForm['status'] = (!isset($dataForm['status'])) ? 'R' : 'A';
+        $dataForm['featured'] = (!isset($dataForm['featured'])) ? 0 : 1;
 
         //Verificar se existe a imagem
         if ($request->hasFile('image')) {
