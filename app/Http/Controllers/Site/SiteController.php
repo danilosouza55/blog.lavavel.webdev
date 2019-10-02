@@ -16,16 +16,29 @@ class SiteController extends Controller
         return view('site.templates.master', compact('itemsCategorias'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $itemsCategorias = Category::all('id', 'name');
-        $itemsPost = Post::where('featured', 0)
-            ->get();
+        $pg = $request->query('pg');
+        $pesquisar = $request->query('pesquisar');
 
-        /** @var \App\Models\Post $postDestaque */
-        $postDestaque = Post::where('featured', 1)
-            ->limit(3)
-            ->get();
+        $itemsCategorias = Category::all('id', 'name');
+
+        $postDestaque = [];
+        if (empty($pg) && empty($pesquisar)) {
+            $itemsPost = Post::where('featured', 0)
+                ->get();
+
+            /** @var \App\Models\Post $postDestaque */
+            $postDestaque = Post::where('featured', 1)
+                ->limit(3)
+                ->get();
+        } else if (!empty($pg)) {
+            $itemsPost = Post::where('category_id', $pg)
+                ->get();
+        } else {
+            $itemsPost = Post::where('title', 'like', '%' . $pesquisar . '%')
+                ->get();
+        }
 
         return view('site.index', compact('itemsCategorias', 'itemsPost', 'postDestaque'));
     }

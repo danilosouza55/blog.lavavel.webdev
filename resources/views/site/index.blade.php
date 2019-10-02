@@ -4,7 +4,7 @@
 @section('conteudo')
 
 <div class="slide">
-    @foreach($postDestaque->all() as $idx => $item)
+    @foreach($postDestaque as $idx => $item)
 
         <?php if( isset($idx) && ($idx == 0) ): ?>
         <div class="col-md-8">
@@ -39,7 +39,7 @@
 <section class="content">
     <div class="col-md-8">
 
-        @foreach($itemsPost->all() as $idx => $item)
+        @foreach($itemsPost as $idx => $item)
             <article class="post">
                 <div class="image-post col-md-4 text-center">
                     <img src="assets/uploads/post/{{$item->image}}" alt="{{$item->title}}" class="img-post">
@@ -64,6 +64,7 @@
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FfaculdadeAlfaUmuarama%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=316115088513380"
             width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
             allowTransparency="true" allow="encrypted-media"></iframe>
+    </div>
 </section>
 
 @endsection

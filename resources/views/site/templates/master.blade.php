@@ -33,7 +33,7 @@
 
         <div class="form col-md-6">
             <form class="form form-search form-inline">
-                <input type="text" name="pesquisar" placeholder="Pesquisar?" class="form-control">
+                <input type="text" value="{{$_GET['pesquisar'] ?? ""}}" name="pesquisar" placeholder="Pesquisar?" class="form-control">
 
                 <button>
                     <span class="glyphicon glyphicon-search"></span>
@@ -65,7 +65,7 @@
                        aria-expanded="false">Categorias <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @foreach($itemsCategorias->all() as $item)
-                            <li><a href="?pg={{$item->name}}">{{$item->name}}</a></li>
+                            <li><a href="?pg={{$item->id}}">{{$item->name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
